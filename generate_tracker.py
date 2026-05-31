@@ -1,4 +1,11 @@
+import os
 import re
+
+def normalize_name(text):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9\s-]', '', text)
+    text = re.sub(r'[\s-]+', '_', text)
+    return text.strip('_')
 
 def generate_tracker():
     with open('README.md', 'r', encoding='utf-8') as f:
@@ -22,22 +29,21 @@ def generate_tracker():
                     tracker_lines.append(f"| {current_category} | **[PROJECT] Build RAG Memory System for Agent** | ⏳ Pending | ⏳ Pending | - |\n")
             current_category = line.replace('## ', '').strip()
         elif line.startswith('- [') and '](' in line:
-            # Extract title and url
             match = re.search(r'- \[(.*?)\]\((.*?)\)', line)
             if match:
                 title = match.group(1)
                 url = match.group(2)
                 
-                # Check if it's the BPE paper which we already did
-                if "Byte-pair Encoding" in title:
-                    status_dissect = "✅ Done"
-                    status_project = "⏳ Pending"
-                    notes = "[BPE Notes](notes/tokenization/byte_pair_encoding.md)"
-                else:
-                    status_dissect = "⏳ Pending"
-                    status_project = "⏳ Pending"
-                    notes = "-"
-                    
+                cat_dir = normalize_name(current_category)
+                file_name = normalize_name(title)
+                
+                notes_path = f"notes/{cat_dir}/{file_name}.md"
+                code_path = f"projects/{cat_dir}/{file_name}.py"
+                
+                status_dissect = "✅ Done" if os.path.exists(notes_path) else "⏳ Pending"
+                status_project = "✅ Done" if os.path.exists(code_path) else "⏳ Pending"
+                notes = f"[Notes]({notes_path})" if os.path.exists(notes_path) else "-"
+                
                 tracker_lines.append(f"| {current_category} | [{title}]({url}) | {status_dissect} | {status_project} | {notes} |\n")
                 
     if current_category is not None:

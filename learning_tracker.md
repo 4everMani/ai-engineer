@@ -3,7 +3,7 @@ Track your progress dissecting papers and building mini-projects here.
 
 | Category | Paper Title | 🧠 Dissected | 🛠️ Project Built | 📝 Notes |
 |----------|-------------|--------------|-------------------|----------|
-| Tokenization | [Byte-pair Encoding](https://arxiv.org/pdf/1508.07909) | ✅ Done | ⏳ Pending | [BPE Notes](notes/tokenization/byte_pair_encoding.md) |
+| Tokenization | [Byte-pair Encoding](https://arxiv.org/pdf/1508.07909) | ✅ Done | ⏳ Pending | [Notes](notes/tokenization/byte_pair_encoding.md) |
 | Tokenization | [Byte Latent Transformer: Patches Scale Better Than Tokens](https://arxiv.org/pdf/2412.09871) | ⏳ Pending | ⏳ Pending | - |
 | Tokenization | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |
 | Vectorization | [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805) | ⏳ Pending | ⏳ Pending | - |
@@ -89,6 +89,10 @@ Track your progress dissecting papers and building mini-projects here.
 | Context Engineering | [Retrieval-Augmented Generation with Knowledge Graphs for Customer Service Question Answering](https://arxiv.org/pdf/2404.17723v1) | ⏳ Pending | ⏳ Pending | - |
 | Context Engineering | [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) | ⏳ Pending | ⏳ Pending | - |
 | Context Engineering | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |
+| Evaluation & Benchmarking | [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/pdf/2306.05685) | ⏳ Pending | ⏳ Pending | - |
+| Evaluation & Benchmarking | [MMLU: Measuring Massive Multitask Language Understanding](https://arxiv.org/pdf/2009.03300) | ⏳ Pending | ⏳ Pending | - |
+| Evaluation & Benchmarking | [Evaluating Large Language Models Trained on Code (HumanEval)](https://arxiv.org/pdf/2107.03374) | ⏳ Pending | ⏳ Pending | - |
+| Evaluation & Benchmarking | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |
 | Case Studies | [Automated Unit Test Improvement using Large Language Models at Meta](https://arxiv.org/pdf/2402.09171) | ⏳ Pending | ⏳ Pending | - |
 | Case Studies | [OpenAI o1 System Card](https://arxiv.org/pdf/2412.16720) | ⏳ Pending | ⏳ Pending | - |
 | Case Studies | [LLM-powered bug catchers](https://arxiv.org/pdf/2501.12862) | ⏳ Pending | ⏳ Pending | - |

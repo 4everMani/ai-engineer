@@ -1,0 +1,12 @@
+torch
+torchvision
+torchaudio
+transformers
+scikit-learn
+numpy
+pandas
+matplotlib
+jupyter
+tqdm
+requests
+beautifulsoup4
