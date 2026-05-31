@@ -35,6 +35,14 @@ Whenever you want to learn a paper or test your knowledge, simply type a prompt 
 - You must explain the concept back to the agent in your own words.
 - The agent will grade you and aggressively hunt for hidden flaws in your mental model.
 
+### 4. `generate-flashcards` (Spaced Repetition)
+**When to use it:** After you finish learning a paper and want to commit it to long-term memory.
+**How to use it:** *"Use the `generate-flashcards` skill on the BPE paper."*
+**What it does:** 
+- It reads your markdown notes and extracts the core concepts and math-to-code translations.
+- It generates an Anki-compatible `.csv` file.
+- You import this file into Anki to get instant, high-quality spaced repetition flashcards.
+
 ---
 
 ## 🗺️ The Learning Tracker & Synthesis
