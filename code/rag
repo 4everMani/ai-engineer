@@ -1,0 +1,74 @@
+import numpy as np
+from openai import OpenAI
+
+client = OpenAI()  # Assumes OPENAI_API_KEY is set in env
+
+
+# -----------------------------
+# 1. Indexing: build vector store
+# -----------------------------
+docs = [
+    {"id": "doc1", "text": "Refunds are allowed within 24 hours of the ride."},
+    {"id": "doc2", "text": "Unsafe driving incidents must be escalated to human support."},
+    {"id": "doc3", "text": "Partial refunds apply if the driver arrives more than 10 minutes late."},
+]
+
+def embed(texts):
+    resp = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=texts,
+    )
+    return np.array([d.embedding for d in resp.data])
+
+# Precompute document embeddings
+doc_texts = [d["text"] for d in docs]
+doc_embs = embed(doc_texts)       # shape: (num_docs, dim)
+doc_norms = np.linalg.norm(doc_embs, axis=1, keepdims=True)
+
+
+# -----------------------------
+# 2. Retrieval function
+# -----------------------------
+def retrieve(query, k=3):
+    q_emb = embed([query])[0]            # shape: (dim,)
+    q_norm = np.linalg.norm(q_emb)
+
+    # cosine similarity
+    sims = (doc_embs @ q_emb) / (doc_norms[:, 0] * q_norm + 1e-8)
+    top_idx = np.argsort(-sims)[:k]
+
+    return [docs[i] for i in top_idx]
+
+
+# -----------------------------
+# 3. RAG query function
+# -----------------------------
+def rag_answer(query):
+    relevant_docs = retrieve(query, k=3)
+    context = "\n\n---\n\n".join(d["text"] for d in relevant_docs)
+
+    prompt = f"""
+You are a support bot. Use ONLY the context below to answer.
+
+Context:
+{context}
+
+User question: {query}
+"""
+
+    resp = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[
+            {"role": "system", "content": "You answer using the given context and say 'I don't know' if it is not enough."},
+            {"role": "user", "content": prompt},
+        ],
+    )
+    return resp.choices[0].message.content.strip()
+
+
+# -----------------------------
+# 4. Example usage
+# -----------------------------
+if __name__ == "__main__":
+    q = "I had an unsafe ride. Will I get a refund?"
+    print(rag_answer(q))
