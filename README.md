@@ -119,6 +119,12 @@ Research papers for software engineers to transition to AI Engineering
 - [Retrieval-Augmented Generation with Knowledge Graphs for Customer Service Question Answering](https://arxiv.org/pdf/2404.17723v1)
 - [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol)
 
+## Evaluation & Benchmarking
+
+- [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/pdf/2306.05685)
+- [MMLU: Measuring Massive Multitask Language Understanding](https://arxiv.org/pdf/2009.03300)
+- [Evaluating Large Language Models Trained on Code (HumanEval)](https://arxiv.org/pdf/2107.03374)
+
 ## Case Studies
 
 - [Automated Unit Test Improvement using Large Language Models at Meta](https://arxiv.org/pdf/2402.09171)
