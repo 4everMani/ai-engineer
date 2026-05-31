@@ -25,6 +25,7 @@ Track your progress dissecting papers and building mini-projects here.
 | Core Architecture | [Google Titans outperform Transformers](https://arxiv.org/pdf/2501.00663) | ⏳ Pending | ⏳ Pending | - |
 | Core Architecture | [VideoRoPE: Rotary Position Embedding](https://arxiv.org/pdf/2502.05173) | ⏳ Pending | ⏳ Pending | - |
 | Core Architecture | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |
+| Core Architecture | **[PROJECT] Build RAG Memory System for Agent** | ⏳ Pending | ⏳ Pending | - |
 | Mixture of Experts | [Sparsely-Gated Mixture-of-Experts Layer](https://arxiv.org/pdf/1701.06538) | ⏳ Pending | ⏳ Pending | - |
 | Mixture of Experts | [GShard](https://arxiv.org/abs/2006.16668) | ⏳ Pending | ⏳ Pending | - |
 | Mixture of Experts | [Switch Transformers](https://arxiv.org/abs/2101.03961) | ⏳ Pending | ⏳ Pending | - |

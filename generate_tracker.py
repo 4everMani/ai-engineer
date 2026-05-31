@@ -18,6 +18,8 @@ def generate_tracker():
         if line.startswith('## '):
             if current_category is not None:
                 tracker_lines.append(f"| {current_category} | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |\n")
+                if current_category == "Core Architecture":
+                    tracker_lines.append(f"| {current_category} | **[PROJECT] Build RAG Memory System for Agent** | ⏳ Pending | ⏳ Pending | - |\n")
             current_category = line.replace('## ', '').strip()
         elif line.startswith('- [') and '](' in line:
             # Extract title and url
