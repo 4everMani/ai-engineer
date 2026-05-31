@@ -41,3 +41,31 @@ Whenever you want to learn a paper or test your knowledge, simply type a prompt 
 
 - **Tracker**: Open [learning_tracker.md](learning_tracker.md) to track your progress.
 - **Synthesis Milestones**: You will notice "Category Synthesis Sessions" at the end of every category in the tracker. When you hit one, **do not read a new paper**. Instead, ask the agent to *"Run a Synthesis Session"* to help you connect the dots between all the previous papers you just read.
+
+---
+
+## 📖 How to Actually Read an AI Paper (The 3-Pass Method)
+
+Academic papers are **not** meant to be read linearly from start to finish like a novel. If you try to read them from page 1 to page 10, you will get bogged down in math and lose the big picture. 
+
+Here is the exact order you should read them in:
+
+### Pass 1: The "What and Why" (5-10 minutes)
+**Goal:** Decide if the paper is worth your time and understand the high-level problem.
+1. **Title & Abstract:** Read carefully. What is the core claim?
+2. **Introduction:** Read the first paragraph (the background) and the last paragraph (their specific contribution).
+3. **Conclusion:** Read this to see what they actually achieved.
+4. **Figures & Diagrams:** Skim the images. A good architecture diagram (like the Transformer block in *Attention Is All You Need*) usually explains 80% of the paper.
+*👉 Stop here and ask yourself: "Do I understand the problem they are solving?"*
+
+### Pass 2: The "How" (The Core Algorithm)
+**Goal:** Understand the mechanics without getting lost in the proofs.
+1. **Methodology / Architecture Section:** This is the meat of the paper. Read this carefully. 
+2. **Equations:** Do **not** try to memorize the math proofs. Look at the variables and figure out the inputs and outputs. (This is where the `dissect-paper` skill's "Math-to-Code" translation is a lifesaver).
+*👉 You can safely SKIP:* "Related Work" (unless you are a researcher looking for citations) and complex mathematical proofs in the Appendix.
+
+### Pass 3: The "Does it actually work?" (The Pragmatic Engineer view)
+**Goal:** Evaluate the paper for real-world production.
+1. **Experiments / Results:** Skim the tables. Did it beat the baseline? 
+2. **Ablation Studies:** This is the most important part of the results! Ablation studies are where authors remove parts of their architecture one by one to see what breaks. It tells you which part of their code is actually doing the heavy lifting.
+3. **Limitations:** Good papers tell you where their model fails. Pay attention to this for production engineering.
