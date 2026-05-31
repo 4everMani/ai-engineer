@@ -11,11 +11,13 @@ def generate_tracker():
         "|----------|-------------|--------------|-------------------|----------|\n"
     ]
     
-    current_category = "General"
+    current_category = None
     
     for line in lines:
         line = line.strip()
         if line.startswith('## '):
+            if current_category is not None:
+                tracker_lines.append(f"| {current_category} | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |\n")
             current_category = line.replace('## ', '').strip()
         elif line.startswith('- [') and '](' in line:
             # Extract title and url
@@ -35,6 +37,9 @@ def generate_tracker():
                     notes = "-"
                     
                 tracker_lines.append(f"| {current_category} | [{title}]({url}) | {status_dissect} | {status_project} | {notes} |\n")
+                
+    if current_category is not None:
+        tracker_lines.append(f"| {current_category} | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |\n")
                 
     with open('learning_tracker.md', 'w', encoding='utf-8') as f:
         f.writelines(tracker_lines)
