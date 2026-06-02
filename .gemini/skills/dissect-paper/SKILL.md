@@ -41,5 +41,8 @@ Execute your teaching in the following iterative phases:
 ### Phase 4: Results & Engineering Critique
 - Present the results.
 - Apply the **Pragmatic Engineer Thoughts** rule.
-- Generate a final Markdown cheat-sheet of the paper in the workspace.
+- Generate three separate Markdown files in the workspace simultaneously:
+  1. A **Cheat-sheet** file summarizing the core concepts.
+  2. A **Detailed Notes** file containing the full, all phases and detailed-exhaustive breakdown of the paper.
+  3. A **Glossary** file named `<paper_name>_glossary.md` formatted as a Markdown table (Term, Definition, Context/Example) containing the meaning of difficult terms used in the paper (e.g., morphemes, phonemes).
 - Remind the user they can invoke the `build-paper-project` skill to create a hands-on coding project for this paper.
