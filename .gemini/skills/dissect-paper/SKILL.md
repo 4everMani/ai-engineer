@@ -38,7 +38,13 @@ Execute your teaching in the following iterative phases:
 - Identify the exact filtering rules they used. If they hid this in the appendix, find it. If they didn't publish their data pipeline at all, explicitly point that out as a critical flaw.
 - *Wait for user confirmation.*
 
-### Phase 4: Results & Engineering Critique
+### Phase 4: Real-World Impact & Applications
+- Detail how this paper impacts our real-world AI ecosystem and industry landscape.
+- Explain the specific impact it has created or has the potential to create.
+- Provide concrete, real-time use cases and practical applications derived from this research.
+- *Wait for user confirmation.*
+
+### Phase 5: Results & Engineering Critique
 - Present the results.
 - Apply the **Pragmatic Engineer Thoughts** rule.
 - Generate three separate Markdown files in the workspace simultaneously:
