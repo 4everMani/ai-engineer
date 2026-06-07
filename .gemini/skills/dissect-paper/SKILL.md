@@ -49,8 +49,10 @@ Execute your teaching in the following iterative phases:
 ### Phase 5: Results & Engineering Critique
 - Present the results.
 - Apply the **Pragmatic Engineer Thoughts** rule.
-- Generate three separate Markdown files in the workspace simultaneously:
+- Generate the following Markdown files simultaneously, ensuring they are placed inside a paper-specific folder within the appropriate category (e.g., `notes/<category>/<paper_name_snake_case>/`):
   1. A **Cheat-sheet** file summarizing the core concepts.
   2. A **Detailed Notes** file containing the full, all phases and detailed-exhaustive breakdown of the paper.
   3. A **Glossary** file named `<paper_name>_glossary.md` formatted as a Markdown table (Term, Definition, Context/Example) containing the meaning of difficult terms used in the paper (e.g., morphemes, phonemes).
+  4. An **Index** file named `<paper_name>.md` containing links to the Cheat-sheet, Detailed Notes, Glossary, and any Architecture Diagrams created for this paper.
+- Ensure that the `learning_tracker.md` file is updated to mark the paper as Dissected and to link to the new Index file.
 - Remind the user they can invoke the `build-paper-project` skill to create a hands-on coding project for this paper.

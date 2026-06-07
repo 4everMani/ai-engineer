@@ -3,8 +3,8 @@ Track your progress dissecting papers and building mini-projects here.
 
 | Category | Paper Title | 🧠 Dissected | 🛠️ Project Built | 📝 Notes |
 |----------|-------------|--------------|-------------------|----------|
-| Tokenization | [Byte-pair Encoding](https://arxiv.org/pdf/1508.07909) | ✅ Done | ⏳ Pending | [Notes](notes/tokenization/byte_pair_encoding.md) |
-| Tokenization | [Byte Latent Transformer: Patches Scale Better Than Tokens](https://arxiv.org/pdf/2412.09871) | ⏳ Pending | ⏳ Pending | - |
+| Tokenization | [Byte-pair Encoding](https://arxiv.org/pdf/1508.07909) | ✅ Done | ⏳ Pending | [Notes](notes/tokenization/byte_pair_encoding/byte_pair_encoding.md) |
+| Tokenization | [Byte Latent Transformer: Patches Scale Better Than Tokens](https://arxiv.org/pdf/2412.09871) | ✅ Done | ⏳ Pending | [Notes](notes/tokenization/byte_latent_transformer/byte_latent_transformer.md) |
 | Tokenization | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |
 | Vectorization | [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805) | ⏳ Pending | ⏳ Pending | - |
 | Vectorization | [IMAGEBIND: One Embedding Space To Bind Them All](https://arxiv.org/pdf/2305.05665) | ⏳ Pending | ⏳ Pending | - |

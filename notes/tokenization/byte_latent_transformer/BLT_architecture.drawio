@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="BLT Architecture">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Main Model Container (Swimlane) -->
+        <mxCell id="container1" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;Byte Latent Transformer (BLT)&lt;/b&gt;" style="swimlane;startSize=40;fillColor=#f8f9fa;strokeColor=#666666;strokeWidth=2;shadow=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="240" y="80" width="820" height="380" as="geometry" />
+        </mxCell>
+
+        <!-- Input Data (Outside) -->
+        <mxCell id="input_data" value="&lt;b&gt;Raw Text / Data&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;i&gt;hello world! x=5&lt;/i&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;shadow=1;fontColor=#000000;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="210" width="140" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Local Encoder -->
+        <mxCell id="local_encoder" value="&lt;b&gt;Local Encoder&lt;/b&gt;&lt;br&gt;&lt;br&gt;Reads Bytes&lt;br&gt;&amp;amp;&lt;br&gt;Predicts Next" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;shadow=1;fontColor=#000000;fontSize=14;" vertex="1" parent="container1">
+          <mxGeometry x="40" y="110" width="140" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Entropy / Patcher Diamond -->
+        <mxCell id="entropy_diamond" value="&lt;b&gt;Entropy (H)&lt;/b&gt;&lt;br&gt;&lt;br&gt;Is Surprise&lt;br&gt;&gt; Threshold?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;shadow=1;fontColor=#000000;fontSize=14;" vertex="1" parent="container1">
+          <mxGeometry x="240" y="90" width="160" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- Latent Transformer (Massive) -->
+        <mxCell id="latent_transformer" value="&lt;b style=&quot;font-size: 18px;&quot;&gt;Latent Transformer&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Global Context&lt;br&gt;&lt;br&gt;(Massive O(N&lt;sup&gt;2&lt;/sup&gt;) Model)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=3;shadow=1;fontColor=#000000;fontSize=14;" vertex="1" parent="container1">
+          <mxGeometry x="460" y="60" width="180" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Local Decoder -->
+        <mxCell id="local_decoder" value="&lt;b&gt;Local Decoder&lt;/b&gt;&lt;br&gt;&lt;br&gt;Unpacks to Bytes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;shadow=1;fontColor=#000000;fontSize=14;" vertex="1" parent="container1">
+          <mxGeometry x="700" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Annotation: Split vs Group -->
+        <mxCell id="annotation_split" value="&lt;b&gt;Yes (High Surprise):&lt;/b&gt; Split into tiny patch&lt;br&gt;&lt;b&gt;No (Low Surprise):&lt;/b&gt; Group into large patch" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#666666;" vertex="1" parent="container1">
+          <mxGeometry x="220" y="240" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Annotation: Output Patches Representation -->
+        <mxCell id="patch_repr" value="&lt;b&gt;Dynamic Patches&lt;/b&gt;&lt;br&gt;[hello world!] [x] [=] [5]" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;shadow=1;fontColor=#000000;fontSize=12;" vertex="1" parent="container1">
+          <mxGeometry x="450" y="280" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Output Data (Outside) -->
+        <mxCell id="output_data" value="&lt;b&gt;Predicted Bytes&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;i&gt;Stream...&lt;/i&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;shadow=1;fontColor=#000000;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="210" width="140" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        
+        <!-- Input -> Encoder -->
+        <mxCell id="edge1" value="Stream Bytes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;fontColor=#000000;strokeColor=#333333;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=13;fontWeight=bold;" edge="1" parent="1" source="input_data" target="local_encoder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Encoder -> Entropy -->
+        <mxCell id="edge2" value="Predict" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;strokeColor=#333333;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=13;fontWeight=bold;" edge="1" parent="container1" source="local_encoder" target="entropy_diamond">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Entropy -> Transformer -->
+        <mxCell id="edge3" value="Forward Patches" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;fontColor=#000000;strokeColor=#333333;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=13;fontWeight=bold;" edge="1" parent="container1" source="entropy_diamond" target="latent_transformer">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="160" />
+              <mxPoint x="430" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Transformer -> Decoder -->
+        <mxCell id="edge4" value="Processed&lt;br&gt;Patches" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;fontColor=#000000;strokeColor=#333333;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=13;fontWeight=bold;" edge="1" parent="container1" source="latent_transformer" target="local_decoder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Decoder -> Output -->
+        <mxCell id="edge5" value="Output Bytes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;fontColor=#000000;strokeColor=#333333;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=13;fontWeight=bold;" edge="1" parent="1" source="local_decoder" target="output_data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
