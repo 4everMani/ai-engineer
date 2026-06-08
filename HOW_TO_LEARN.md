@@ -77,3 +77,16 @@ Here is the exact order you should read them in:
 1. **Experiments / Results:** Skim the tables. Did it beat the baseline? 
 2. **Ablation Studies:** This is the most important part of the results! Ablation studies are where authors remove parts of their architecture one by one to see what breaks. It tells you which part of their code is actually doing the heavy lifting.
 3. **Limitations:** Good papers tell you where their model fails. Pay attention to this for production engineering.
+
+---
+
+## 🎨 Global Diagram Styling Rules
+Whenever you (the AI Agent) are tasked with generating a Draw.io diagram (whether via the `drawio-skill` or manually), you MUST always follow these aesthetic rules to match the user's preferences:
+1. **Dark Canvas:** Set the root XML `<mxGraphModel ... background="#121212">`.
+2. **White Text/Lines:** Ensure all `fontColor=#ffffff` and `strokeColor=#ffffff` so they pop against the dark background.
+3. **Emoji Icons (Default):** Embed native unicode emojis directly into the `<mxCell>` text `value` attributes for generic components (e.g., `value="Database<br/>💾"`).
+4. **External Tech Icons:** When representing specific technologies or frameworks (e.g., Python, PyTorch, AWS, PostgreSQL), use the Simple Icons CDN to fetch crisp SVG logos in their official brand colors! Set the shape style to `shape=image;image=https://cdn.simpleicons.org/<slug>;` (e.g., `shape=image;image=https://cdn.simpleicons.org/pytorch;`) and hide the background fill.
+5. **Premium Styling (Gradients & Shadows):** For standard non-image shapes, use deep, vibrant hex colors for the `fillColor` (like `#4c1d95`) and set a slightly darker `gradientColor` (like `#312e81`) to give them rich depth. ALWAYS add `shadow=1` to the shapes and swimlanes.
+6. **Animated Data Flow:** Always set `flowAnimation=1` on connector edges to make the data paths visually animate inside the diagram.
+
+*Note: A custom drawio-skill preset `dark-neon` has already been installed to handle the color palette automatically, but you must manually ensure the background hex, emojis, and external image URLs are applied to the XML!*
