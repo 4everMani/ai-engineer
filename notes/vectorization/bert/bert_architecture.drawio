@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="BERT Architecture">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" background="#121212">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Text Tokens (Dark Blue) -->
+        <mxCell id="t1" value="[CLS]&lt;br&gt;🏷️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="100" y="500" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" value="I&lt;br&gt;🗣️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="180" y="500" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" value="[MASK]&lt;br&gt;🕵️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="260" y="500" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" value="cats&lt;br&gt;🐈" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="340" y="500" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="t5" value="[SEP]&lt;br&gt;🛑" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="420" y="500" width="60" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Embeddings (Dark Green) -->
+        <mxCell id="emb_tok" value="📚 Token Embedding" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#064e3b;strokeColor=#34d399;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="100" y="420" width="380" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="emb_seg" value="🖍️ Segment Embedding" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#064e3b;strokeColor=#34d399;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="100" y="380" width="380" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="emb_pos" value="📍 Position Embedding" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#064e3b;strokeColor=#34d399;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="100" y="340" width="380" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Summation -->
+        <mxCell id="sum" value="➕" style="ellipse;whiteSpace=wrap;html=1;fillColor=#78350f;strokeColor=#fbbf24;fontColor=#ffffff;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="270" y="270" width="40" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Transformer Encoders (Dark Purple) -->
+        <mxCell id="encoders" value="🧠 12 to 24 Layers of Transformer Encoders&lt;br&gt;(All words look at all words simultaneously)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4c1d95;strokeColor=#a78bfa;fontColor=#ffffff;fontSize=14;align=center;" vertex="1" parent="1">
+          <mxGeometry x="100" y="150" width="380" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Output Heads (Dark Orange/Red) -->
+        <mxCell id="nsp" value="⚖️ NSP Head&lt;br&gt;(IsNext/NotNext)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f1d1d;strokeColor=#fca5a5;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="100" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mlm" value="🎯 MLM Head&lt;br&gt;(Guess the word)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f1d1d;strokeColor=#fca5a5;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Edges (White) -->
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.5;exitY=0;entryX=0.1;entryY=1;" edge="1" parent="1" source="t1" target="emb_tok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.5;exitY=0;entryX=0.3;entryY=1;" edge="1" parent="1" source="t2" target="emb_tok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="t3" target="emb_tok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.5;exitY=0;entryX=0.7;entryY=1;" edge="1" parent="1" source="t4" target="emb_tok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.5;exitY=0;entryX=0.9;entryY=1;" edge="1" parent="1" source="t5" target="emb_tok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="emb_pos" target="sum">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="sum" target="encoders">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.2;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="encoders" target="nsp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;exitX=0.8;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="encoders" target="mlm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Unidirectional">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" background="#121212">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="w1" value="The" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1"><mxGeometry x="100" y="100" width="80" height="40" as="geometry" /></mxCell>
+        <mxCell id="w2" value="bank 🏦" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f1d1d;strokeColor=#fca5a5;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1"><mxGeometry x="220" y="100" width="80" height="40" as="geometry" /></mxCell>
+        <mxCell id="w3" value="of" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1"><mxGeometry x="340" y="100" width="80" height="40" as="geometry" /></mxCell>
+        <mxCell id="w4" value="the" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1"><mxGeometry x="460" y="100" width="80" height="40" as="geometry" /></mxCell>
+        <mxCell id="w5" value="river 🌊" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1"><mxGeometry x="580" y="100" width="80" height="40" as="geometry" /></mxCell>
+        <mxCell id="q" value="❓ Meaning" style="ellipse;whiteSpace=wrap;html=1;fillColor=#78350f;strokeColor=#fbbf24;fontColor=#ffffff;fontSize=14;" vertex="1" parent="1"><mxGeometry x="220" y="200" width="80" height="60" as="geometry" /></mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;" edge="1" parent="1" source="w1" target="w2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;" edge="1" parent="1" source="w2" target="w3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;" edge="1" parent="1" source="w3" target="w4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;" edge="1" parent="1" source="w4" target="w5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;dashed=1;" edge="1" parent="1" source="w2" target="q"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

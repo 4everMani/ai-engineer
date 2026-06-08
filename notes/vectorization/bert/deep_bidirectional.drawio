@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Deep">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" background="#121212">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="w1" value="The" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;" vertex="1" parent="1"><mxGeometry x="100" y="200" width="60" height="40" as="geometry" /></mxCell>
+        <mxCell id="w2" value="bank 🏦" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#064e3b;strokeColor=#34d399;fontColor=#ffffff;" vertex="1" parent="1"><mxGeometry x="220" y="200" width="60" height="40" as="geometry" /></mxCell>
+        <mxCell id="w3" value="of" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;" vertex="1" parent="1"><mxGeometry x="340" y="200" width="60" height="40" as="geometry" /></mxCell>
+        <mxCell id="w4" value="the" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;" vertex="1" parent="1"><mxGeometry x="460" y="200" width="60" height="40" as="geometry" /></mxCell>
+        <mxCell id="w5" value="river 🌊" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e3a8a;strokeColor=#60a5fa;fontColor=#ffffff;" vertex="1" parent="1"><mxGeometry x="580" y="200" width="60" height="40" as="geometry" /></mxCell>
+        
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#ffffff;endArrow=classic;startArrow=classic;" edge="1" parent="1" source="w2" target="w1"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="250" y="150" /><mxPoint x="130" y="150" /></Array></mxGeometry></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#ffffff;endArrow=classic;startArrow=classic;" edge="1" parent="1" source="w2" target="w3"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="250" y="150" /><mxPoint x="370" y="150" /></Array></mxGeometry></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#ffffff;endArrow=classic;startArrow=classic;" edge="1" parent="1" source="w2" target="w4"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="250" y="110" /><mxPoint x="490" y="110" /></Array></mxGeometry></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#ffffff;endArrow=classic;startArrow=classic;" edge="1" parent="1" source="w2" target="w5"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="250" y="70" /><mxPoint x="610" y="70" /></Array></mxGeometry></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
