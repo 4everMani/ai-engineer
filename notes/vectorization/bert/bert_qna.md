@@ -110,3 +110,153 @@ Because in high-dimensional space (768 dimensions), adding vectors superimposes 
 1. *"I am a plural feline"* **(Token)**
 2. *"I am located in the first sentence"* **(Segment)**
 3. *"I am the 4th word from the left"* **(Position)**
+
+---
+
+**User:** *can you explain me what is list of 768 floating point numbers?*
+
+**Mentor:**
+That’s a great question! That "list of 768 floating-point numbers" is one of the most fundamental concepts in modern AI, known as a **word embedding** (or **vector**). 
+
+Here is a breakdown of what exactly those 768 numbers are and how they work:
+
+### 1. What is it mathematically?
+Mathematically, it is just an array or a list of 768 decimal numbers. For example, it might look something like this:
+`[0.12, -0.45, 0.89, -0.01, ..., 0.34]` (repeated 768 times).
+
+### 2. What does it represent? (The "Meaning Space")
+Imagine a 3D space (like an empty room). You could describe the location of any object in that room using 3 numbers (X, Y, and Z coordinates). 
+
+Now, imagine a mind-bending space with **768 dimensions**. This list of numbers is simply a coordinate pointing to a specific location in that 768-dimensional space.
+*   In this space, words that have similar meanings (like "cats" and "dogs") are mapped to coordinates that are very close to each other. 
+*   Words that mean totally different things (like "cats" and "refrigerator") are mapped to coordinates that are far apart.
+
+### 3. What does each individual number mean?
+When humans think about a word like "cats", we break it down into concepts:
+*   Is it an animal? (Yes)
+*   Is it plural? (Yes)
+*   Is it a machine? (No)
+*   Is it fluffy? (Yes)
+
+You can think of each of the 768 numbers as a "score" for a specific, abstract concept. 
+*   Maybe dimension #142 tracks "animality". For "cats", that number might be very high (e.g., `0.95`), and for "car", it might be very low (e.g., `-0.88`).
+*   Maybe dimension #511 tracks "plurality". For "cats", it's high, but for "cat", it's low.
+
+**The Catch:** In reality, the AI learned these 768 dimensions purely by reading billions of words and seeing which words appear next to each other. Because a computer learned them, these dimensions aren't perfectly human-readable (we can't explicitly say "Dimension 42 is fluffiness"). Instead, they represent incredibly complex, alien mathematical concepts that *behave* like meaning.
+
+### 4. Why specifically 768?
+There is nothing inherently magical about the number 768. It is simply an architectural choice made by the creators of the original BERT model (specifically, the "BERT-Base" version). 
+*   They found that 768 numbers provided a "large enough space" to capture all the nuances of the English language without being so large that it was too slow to compute.
+*   Larger models use larger lists. For example, BERT-Large uses 1,024 numbers, and GPT-4 uses over 12,000!
+
+**Summary:**
+When BERT reads the ID #4921 for "cats", it translates it into that 768-number coordinate. From that point on, BERT stops treating it as a word and starts treating it as a mathematical coordinate full of rich, nuanced meaning.
+
+### See it in Python
+Here is how you extract these numbers using the Hugging Face `transformers` library:
+
+```python
+from transformers import BertTokenizer, BertModel
+import torch
+
+# Load the standard 768-dimension BERT model
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertModel.from_pretrained('bert-base-uncased')
+
+# Tokenize and get IDs
+word = "cats"
+inputs = tokenizer(word, return_tensors="pt") 
+# e.g., [[101, 4921, 102]] -> [CLS], "cats", [SEP]
+
+# Get the embeddings
+with torch.no_grad():
+    outputs = model(**inputs)
+
+# Extract numbers for "cats" (Index 1)
+cats_embedding = outputs.last_hidden_state[0, 1, :]
+
+print(f"Shape: {cats_embedding.shape}") # torch.Size([768])
+print(f"First 5 numbers:\n {cats_embedding[:5]}")
+```
+
+### Step-by-Step Breakdown
+
+1. **Loading the Dictionary and the Brain:** `BertTokenizer` is the dictionary. It knows that "cats" = 4921. `BertModel` is the actual neural network containing the massive lookup tables of floating-point numbers.
+
+2. **`tokenizer(word, return_tensors="pt")`:** When we pass "cats" to the tokenizer, it doesn't just return 4921. BERT always expects a "Start of Sentence" token (`[CLS]` which is ID 101) and an "End of Sentence" token (`[SEP]` which is ID 102). So, it returns `[101, 4921, 102]`.
+
+3. **`outputs = model(**inputs)`:** This is where the magic happens. We hand the list of IDs `[101, 4921, 102]` to the BERT model. BERT looks inside its internal lookup table (specifically a layer called the Embedding Layer) and grabs the 768 numbers for each ID.
+
+4. **`outputs.last_hidden_state[0, 1, :]`:** The output is a 3D grid of numbers containing the data for all the words.
+   * `0`: Gets the first (and only) sentence we passed in.
+   * `1`: Gets the second word in the sentence. (Index `0` is the `[CLS]` token, Index `1` is "cats").
+   * `:`: Gets **all 768 numbers** for that specific word.
+
+### What does the final output actually look like?
+
+If you run that `print` statement at the very end, you will literally see the raw decimals. It will print something like this:
+
+```text
+Shape of the embedding: torch.Size([768])
+
+The first 5 numbers for 'cats':
+ tensor([ 0.1345, -0.4219,  0.8812,  0.0331, -0.1982])
+```
+
+If you printed the whole thing, your screen would fill up with 768 of those decimals. That array of numbers is the pure, mathematical "essence" of the word "cats" according to BERT.
+
+---
+
+**User:** *can you please explain this also*
+```python
+import torch
+import torch.nn as nn
+
+# 1. Push the text through BERT's layers
+sequence_output = bert_encoder(input_ids) 
+
+# 2. Extract ONLY the vector for the [MASK] token
+mask_position = 2
+masked_vector = sequence_output[0, mask_position, :] # Shape: (768 numbers)
+
+# 3. Project that vector against the entire English dictionary
+dictionary_scores = mlm_prediction_head(masked_vector) # Shape: (30,000 numbers)
+
+# 4. Compute the Error (Cross Entropy Loss)
+loss_function = nn.CrossEntropyLoss()
+true_label = torch.tensor([405]) 
+loss = loss_function(dictionary_scores.unsqueeze(0), true_label)
+
+# 5. The model updates its brain
+loss.backward()
+```
+
+**Mentor:**
+This code snippet is demonstrating the exact mechanism of how BERT is trained. It is showing a process called **Masked Language Modeling (MLM)**. 
+
+In simple terms, BERT learns how language works by playing millions of games of "fill in the blank." This code is the math behind one single round of that game.
+
+Here is a step-by-step breakdown of what the code is doing:
+
+### 1. Pushing Text through BERT (The Forward Pass)
+Imagine we gave the model the sentence: `"I [MASK] cats"`. We hid the word "love". 
+When we pass the sentence through the massive neural network (`bert_encoder`), BERT looks at the surrounding words ("I" and "cats") to figure out the context. It outputs a unique 768-number vector for *every single word* in the sentence. 
+
+### 2. Extracting the Blank Space
+BERT outputted a vector for "I", a vector for "[MASK]", and a vector for "cats". But we only care about the blank space! 
+Because "[MASK]" is the 3rd token in the sequence, we grab the 768 numbers located exactly at Index 2. 
+These 768 numbers represent **BERT's mathematical best guess at the context of the missing word.**
+
+### 3. The Dictionary Prediction
+Right now, we have 768 numbers, but we need an actual English word. 
+The `mlm_prediction_head` acts like a translator. It takes those 768 numbers and "projects" them against BERT's entire dictionary of 30,000 words. 
+The output is a new list of **30,000 numbers**. Each number represents a "confidence score" for a specific word being the correct answer (e.g., "dogs" might get `0.02`, "love" might get `0.65`).
+
+### 4. Computing the Error (How wrong was it?)
+Now, it's grading time. We know the hidden word was "love", which is dictionary ID #405. 
+We use `CrossEntropyLoss`, a mathematical formula that compares BERT's 30,000 guesses against the 1 absolute truth. 
+If BERT gave a high score to word #405, the `loss` (error) will be small. If it gave a high score to "refrigerator", the `loss` will be massive.
+
+### 5. Updating the Brain (Learning)
+This is the most important line in Deep Learning (**Backpropagation**). 
+Now that the computer knows exactly *how wrong* its guess was, the `.backward()` function sends a signal in reverse through the entire neural network. It mathematically nudges millions of internal parameters inside BERT so it predicts word #405 ("love") with a higher probability next time.
