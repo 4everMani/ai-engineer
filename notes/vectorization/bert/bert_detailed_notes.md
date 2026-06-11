@@ -426,3 +426,103 @@ Looking back at the BERT paper from today's engineering standards, several criti
 *   **Generation Inability:** BERT's bidirectional nature makes it useless for text generation. It cemented the divide: Encoders for search/understanding, Decoders for generation.
 
 In summary, BERT didn't just break benchmark records; it permanently altered the trajectory of AI development, proving the massive potential of Unsupervised Pre-training and Attention mechanisms.
+
+---
+## Phase 5.5: Fine-Tuning Patterns & BERT Variants
+
+While pre-training is the hardest part, the actual value of BERT comes from **fine-tuning** it on downstream tasks. Since the original paper, the ecosystem around BERT has exploded.
+
+### 1. Fine-Tuning Architectures (With Code Examples)
+
+BERT acts as a powerful feature extractor. To fine-tune it for a specific task, you typically add a small, task-specific "head" (usually a simple Linear layer) on top of BERT's outputs. 
+
+#### A. Sequence Classification (e.g., Sentiment Analysis)
+If you want to classify an entire sentence as "Positive" or "Negative", you only care about the `[CLS]` token. Because the Self-Attention mechanism forces the `[CLS]` token to look at every other word, its final 768-dimensional vector acts as a mathematical summary of the *entire* sentence.
+
+**The PyTorch Implementation:**
+```python
+import torch
+import torch.nn as nn
+from transformers import BertModel
+
+class BertForSentiment(nn.Module):
+    def __init__(self, num_classes=2):
+        super().__init__()
+        # Load the pre-trained BERT model
+        self.bert = BertModel.from_pretrained("bert-base-uncased")
+        
+        # Add a custom Classification Head on top
+        # It takes BERT's 768-dim [CLS] output and squashes it down to 2 dimensions (Pos/Neg)
+        self.classifier = nn.Linear(768, num_classes)
+        
+    def forward(self, input_ids, attention_mask):
+        # 1. Pass data through BERT
+        outputs = self.bert(input_ids=input_ids, attention_mask=attention_mask)
+        
+        # 2. Extract ONLY the [CLS] token's vector (It is always at Index 0)
+        # outputs.last_hidden_state shape: (batch_size, sequence_length, 768)
+        cls_vector = outputs.last_hidden_state[:, 0, :] # Shape: (batch_size, 768)
+        
+        # 3. Pass the [CLS] vector through our custom classification head
+        logits = self.classifier(cls_vector)
+        return logits
+```
+**Training Strategy:** For this, you typically **unfreeze** all 110 million parameters of BERT. You train the model on your sentiment dataset for a very short time (2-4 epochs) with a tiny learning rate (e.g., `2e-5`).
+
+#### B. Token Classification (e.g., Named Entity Recognition - NER)
+Instead of classifying the whole sentence, what if you need to tag *every individual word*? (e.g., Identifying if a word is a Person, Location, or Date).
+*   **How it works:** Instead of throwing away all vectors except `[CLS]`, you keep the outputs for *every single word*.
+*   **The Math:** You pass the entire `(batch_size, sequence_length, 768)` matrix through a Linear Layer that outputs `(batch_size, sequence_length, num_tags)`. The model makes a separate prediction for every word simultaneously.
+
+#### C. Parameter-Efficient Fine-Tuning (PEFT) & LoRA
+Full fine-tuning is computationally expensive. You need massive GPUs to update 110M parameters. Modern engineering solves this with **LoRA (Low-Rank Adaptation)**.
+
+Instead of updating BERT's original massive matrices ($W_0$), we completely **freeze** BERT. We then inject two tiny, newly initialized matrices ($A$ and $B$) next to it. 
+During training, we only update $A$ and $B$. During inference, we multiply them together and add them to the original weights: $W_{new} = W_0 + (B \times A)$.
+
+**Why is this brilliant?**
+If BERT's original weight matrix is `10,000 x 10,000` (100,000,000 parameters), doing math on it is slow.
+LoRA creates Matrix A (`10,000 x 8`) and Matrix B (`8 x 10,000`). 
+*   $10,000 \times 8 = 80,000$ parameters.
+*   $8 \times 10,000 = 80,000$ parameters.
+*   Total trainable parameters: **160,000**.
+You just reduced the training memory footprint by **99.8%**, allowing you to fine-tune BERT on a consumer laptop while retaining almost identical accuracy to full fine-tuning!
+
+### 2. Attention Visualization in Code
+
+How do we actually *see* the "Contextual Malleability" mentioned in Phase 4? We can use tools like `bertviz` or extract the attention weights directly via Hugging Face.
+
+```python
+from transformers import AutoTokenizer, AutoModel
+import torch
+
+# Load model and ask it to output its internal attention scores
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+model = AutoModel.from_pretrained("bert-base-uncased", output_attentions=True)
+
+text = "The construction worker operated the massive steel crane."
+inputs = tokenizer(text, return_tensors="pt")
+
+# Run the model
+outputs = model(**inputs)
+
+# outputs.attentions is a tuple of 12 matrices (one for each layer)
+# Shape of each layer's attention: (batch_size, num_heads, sequence_length, sequence_length)
+layer_12_attention = outputs.attentions[-1] 
+
+# You can literally inspect the matrix to see exactly how much 'focus' (from 0.0 to 1.0)
+# the word "crane" is giving to the word "steel" vs the word "the".
+```
+
+### 3. Tokenization Edge Cases
+*   **Vocabulary Size:** The `bert-base-uncased` model uses exactly **30,522 tokens** (not exactly 30,000). This includes the standard sub-words and the special tokens (`[CLS]`, `[SEP]`, `[MASK]`, `[PAD]`, `[UNK]`).
+*   **Out-of-Vocabulary (OOV):** If a character is so rare (like an obscure emoji or foreign symbol) that it can't even be broken down into WordPiece sub-words, BERT defaults to the `[UNK]` (Unknown) token.
+
+### 4. The Evolution of BERT (Variants)
+
+The original BERT architecture was a proof-of-concept. The open-source community quickly optimized it:
+
+*   **RoBERTa (Robustly Optimized BERT Approach):** Facebook (Meta) realized BERT was severely under-trained. RoBERTa used the exact same architecture but trained on 10x more data (160GB vs 16GB), trained for longer, and removed the Next Sentence Prediction (NSP) task entirely (proving it wasn't actually that helpful). RoBERTa consistently beats BERT.
+*   **ELECTRA:** Instead of masking words and guessing them, ELECTRA uses a "Generator/Discriminator" setup (like a GAN). A tiny model replaces random words with plausible fakes, and the main model has to predict if each word is "Real" or "Fake". This is vastly more compute-efficient than MLM.
+*   **DistilBERT:** A smaller, faster, cheaper version of BERT trained using "Knowledge Distillation" (teaching a small model to mimic the outputs of the large model). It retains 97% of BERT's performance while being 60% faster.
+*   **mBERT (Multilingual BERT):** Trained on Wikipedia text from 104 different languages. It demonstrated incredible "zero-shot cross-lingual transfer" (e.g., fine-tuning it to detect spam in English, and it automatically knows how to detect spam in French without any French training data).

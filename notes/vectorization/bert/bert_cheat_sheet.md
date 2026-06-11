@@ -12,9 +12,13 @@ BERT uses a Deep Bidirectional Transformer Encoder. Every word attends to every 
 
 ### The Three Embeddings
 To prevent the model from treating sentences like a "bag of words", BERT adds three vectors together for every word:
-1.  **Token Embedding:** The core meaning of the sub-word (from a 30,000 WordPiece vocabulary).
+1.  **Token Embedding:** The core meaning of the sub-word (from a ~30,522 WordPiece vocabulary).
 2.  **Segment Embedding:** A binary indicator (A or B) telling the model which sentence the word belongs to.
 3.  **Position Embedding:** The physical index of the word (0 to 512).
 
 ### Real-World Use Case
 BERT is an **Encoder**. It is used for tasks that require deep comprehension, classification, or semantic search (Vector Databases/RAG pipelines). It is NOT used for text generation (which requires Decoders like GPT).
+
+### Fine-Tuning & Variants
+*   **Fine-Tuning:** Done by taking the `[CLS]` token or all token vectors and adding a tiny task-specific Neural Network layer on top. 
+*   **Variants:** The community optimized BERT rapidly. **RoBERTa** trained on 10x data without NSP. **DistilBERT** shrunk it by 40% while retaining 97% performance. **mBERT** proved it could learn 104 languages simultaneously.

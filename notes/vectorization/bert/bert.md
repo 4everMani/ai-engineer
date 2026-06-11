@@ -13,3 +13,8 @@
 ## Status
 - **Dissected:** ✅ Yes
 - **Project Built:** ⏳ Pending (Ask to invoke `build-paper-project` to begin!)
+
+
+- **Implement** a fine-tuned BERT classifier from scratch
+- **Build** a simple semantic search engine using BERT embeddings
+- **Compare** BERT to more recent models (DeBERTa, T5) empirically
