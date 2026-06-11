@@ -31,12 +31,14 @@ Execute your teaching in the following iterative phases:
 ### Phase 2: Core Methodology & Mathematics
 - Break down the architecture layer by layer.
 - Apply the **Math-to-Code Translation** rule for all formulas.
+- Explicitly detail **Computational Complexity**: time/space complexity (e.g., O(n²) vs O(1)), VRAM requirements, and inference latency estimates.
 - *Wait for user confirmation.*
 
 ### Phase 3: The Data Pipeline (The Secret Sauce)
 - Explicitly extract and analyze how the authors curated their dataset.
 - Explain their curation heuristics (e.g., de-duplication/toxicity filtering for NLP, artifact removal/augmentation for CV, or environment constraints for RL) and data mixture ratios.
 - Identify the exact filtering rules they used. If they hid this in the appendix, find it. If they didn't publish their data pipeline at all, explicitly point that out as a critical flaw.
+- Provide an **Explicit Audit Trail**: Call out reproducibility concerns if data/code is not public, and flag potential licensing or contamination risks.
 - *Wait for user confirmation.*
 
 ### Phase 4: Real-World Impact & Deep Technical Dive
@@ -54,8 +56,18 @@ Execute your teaching in the following iterative phases:
 - Provide explicit code snippets showing how to extract and visualize the model's internal states (e.g., attention heatmaps for Transformers, feature maps for CNNs, or value gradients for RL).
 - *Wait for user confirmation.*
 
-### Phase 6: Results, Engineering Critique, & Documentation
+### Phase 6: Results & Ablation Studies
 - Present the final benchmark results.
+- Mandate an **Ablation Study Analysis**: Extract their ablation tables and explicitly explain what was removed, how much performance degraded, and what this reveals about component importance.
+- *Wait for user confirmation.*
+
+### Phase 6.5: Failure Modes & Boundary Analysis
+- Identify theoretical limits and failure cases specific to this domain (e.g., context length limits for NLP, resolution limits for CV, credit assignment for RL).
+- Discuss computational bottlenecks (VRAM, latency, training time).
+- Provide a decision tree: Specify exactly when to use this approach versus when to use an alternative.
+- *Wait for user confirmation.*
+
+### Phase 7: Documentation & Engineering Critique
 - Apply the **Pragmatic Engineer Thoughts** rule.
 - Generate the following Markdown files simultaneously, ensuring they are placed inside a paper-specific folder within the appropriate category (e.g., `notes/<category>/<paper_name_snake_case>/`):
   1. A **Cheat-sheet** file summarizing the core concepts.
