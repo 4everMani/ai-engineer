@@ -1,9 +1,15 @@
 # BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding
 
-This directory contains the notes, cheat sheets, and Q&A from the dissection of the BERT paper.
+## Resources
+- [Original Paper PDF](../../../papers/vectorization/BERT%20Pre-training%20of%20Deep%20Bidirectional%20Transformers%20for%20Language%20Understanding.pdf)
+- [Architecture Diagram](bert_architecture.drawio)
+- [Interactive Q&A Session](bert_qna.md)
 
-## Contents
-1. [Cheat Sheet](bert_cheat_sheet.md) - A quick reference guide summarizing the core concepts.
-2. [Detailed Notes](bert_detailed_notes.md) - The exhaustive, in-depth breakdown of the architecture, math, and concepts (Phases 1 & 2).
-3. [Glossary](bert_glossary.md) - A dictionary of difficult terms and components used in the paper.
-4. [Interactive Q&A](bert_qna.md) - Specific, detailed answers to questions asked during the dissection.
+## Documentation
+- [Cheat-sheet](bert_cheat_sheet.md) - Quick summary of the core concepts and mechanics.
+- [Detailed Notes](bert_detailed_notes.md) - Comprehensive, multi-phase breakdown including engineering critique.
+- [Glossary](bert_glossary.md) - Definitions of key terminology from the paper.
+
+## Status
+- **Dissected:** ✅ Yes
+- **Project Built:** ⏳ Pending (Ask to invoke `build-paper-project` to begin!)
