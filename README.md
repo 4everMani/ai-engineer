@@ -136,7 +136,4 @@ Research papers for software engineers to transition to AI Engineering
 - [Netflix Foundation Models](https://netflixtechblog.com/foundation-model-for-personalized-recommendation-1a0bd8e02d39)
 - [uber queryGPT](https://www.uber.com/en-IN/blog/query-gpt/)
 
-## Video Course
-
-AI Engineering: https://interviewready.io/course-page/ai-engineering
 
