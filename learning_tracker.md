@@ -10,7 +10,7 @@ Track your progress dissecting papers and building mini-projects here.
 | Vectorization | [IMAGEBIND: One Embedding Space To Bind Them All](https://arxiv.org/pdf/2305.05665) | ⏳ Pending | ⏳ Pending | - |
 | Vectorization | [SONAR: Sentence-Level Multimodal and Language-Agnostic Representations](https://arxiv.org/pdf/2308.11466) | ⏳ Pending | ⏳ Pending | - |
 | Vectorization | [FAISS library](https://arxiv.org/pdf/2401.08281) | ⏳ Pending | ⏳ Pending | - |
-| Vectorization | [Facebook Large Concept Models](https://arxiv.org/pdf/2412.08821v2) | ⏳ Pending | ⏳ Pending | - |
+| Vectorization | [Facebook Large Concept Models](https://arxiv.org/pdf/2412.08821v2) | 🔬 In Progress | ⏳ Pending | [Notes](notes/vectorization/large_concept_models/large_concept_models.md) |
 | Vectorization | **[MILESTONE] Category Synthesis Session** | ⏳ Pending | - | - |
 | Infrastructure | [TensorFlow](https://arxiv.org/pdf/1605.08695) | ⏳ Pending | ⏳ Pending | - |
 | Infrastructure | [Deepseek filesystem](https://github.com/deepseek-ai/3FS/blob/main/docs/design_notes.md) | ⏳ Pending | ⏳ Pending | - |
