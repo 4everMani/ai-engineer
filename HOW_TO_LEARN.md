@@ -10,6 +10,18 @@ To help you transition from Software Engineer to AI Engineer, we have built a hi
 
 Whenever you want to learn a paper or test your knowledge, simply type a prompt telling the agent to "use" one of these skills:
 
+### 0. `learn-python-pytorch` (The Prerequisites) ⭐ START HERE
+**When to use it:** Before everything else! Complete this if you're not yet comfortable reading Python/PyTorch code in research papers.
+**How to use it:** *"Use the `learn-python-pytorch` skill to teach me Python Module 1: Python Foundations"*
+**What it does:** 
+- Teaches Python (12 modules) and PyTorch (14 modules) through detailed, interactive lessons.
+- Every concept is connected to AI engineering and research paper code.
+- Generates comprehensive notes saved to `curriculum/python/notes/` and `curriculum/pytorch/notes/`.
+- Tracks your progress in `curriculum/python/python_path.md` and `curriculum/pytorch/pytorch_path.md`.
+- All code is **Google Colab compatible** — no local setup needed.
+
+> 📌 **Complete both paths before using `dissect-paper` or `build-paper-project`.** The curriculum is at [curriculum/README.md](curriculum/README.md).
+
 ### 1. `dissect-paper` (The Theory Deep-Dive)
 **When to use it:** When you are starting a brand new paper.
 **How to use it:** *"Use the `dissect-paper` skill on the Byte Latent Transformer paper."*
