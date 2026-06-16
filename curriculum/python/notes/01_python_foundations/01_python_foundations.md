@@ -303,6 +303,74 @@ class TransformerBlock:
             activation_fn = "gelu"
 ```
 
+### 1.5 Constants in Python
+
+**Python has no built-in `const` or `final` keyword.** Unlike Java's `final` or C#'s `const`, there's no way to make a variable truly immutable at the language level. Here are the three approaches, from most common to most strict:
+
+#### Approach 1: UPPER_CASE Convention (99% of Python code)
+
+```python
+# Just name it in UPPER_CASE — everyone agrees not to reassign
+MAX_SEQ_LENGTH = 512
+LEARNING_RATE = 3e-4
+PAD_TOKEN_ID = 0
+D_MODEL = 768
+NUM_HEADS = 12
+VOCAB_SIZE = 30522
+EPS = 1e-12
+
+# ⚠️ Nothing stops you from reassigning — this is purely a convention
+MAX_SEQ_LENGTH = 1024  # Works! Python won't complain.
+```
+
+This is what **all major ML codebases use** — PyTorch, HuggingFace, TensorFlow.
+
+#### Approach 2: `Final` Type Hint (Python 3.8+) — IDE Warning
+
+```python
+from typing import Final
+
+MAX_SEQ_LENGTH: Final = 512
+LEARNING_RATE: Final[float] = 3e-4
+MODEL_NAME: Final[str] = "bert-base-uncased"
+
+# Your IDE (VS Code) will show a warning ⚠️ and mypy will flag it,
+# but Python itself still allows it at runtime!
+MAX_SEQ_LENGTH = 1024  # IDE warning, but runs fine
+```
+
+#### Approach 3: True Enforcement via `__setattr__`
+
+```python
+# If you truly need to prevent reassignment:
+class _Constants:
+    """Raises an error if you try to reassign an attribute."""
+    def __setattr__(self, name, value):
+        if name in self.__dict__:
+            raise AttributeError(f"Cannot reassign constant '{name}'")
+        super().__setattr__(name, value)
+
+CONST = _Constants()
+CONST.MAX_SEQ_LENGTH = 512
+CONST.PAD_TOKEN_ID = 0
+
+print(CONST.MAX_SEQ_LENGTH)  # 512
+# CONST.MAX_SEQ_LENGTH = 1024  # ❌ AttributeError: Cannot reassign constant 'MAX_SEQ_LENGTH'
+```
+
+**🔥 AI Context:** In practice, ML code uses UPPER_CASE convention and moves on:
+```python
+# Typical model config constants
+D_MODEL = 768
+N_HEADS = 12
+N_LAYERS = 12
+DROPOUT = 0.1
+MAX_LEN = 512
+BATCH_SIZE = 32
+LR = 3e-4
+WARMUP_STEPS = 1000
+```
+
 ### ⚠️ Section 1 Pitfalls
 
 ```python
@@ -391,7 +459,8 @@ print(f"Loss: {loss:.6f}")          # Loss: 2.456789
 print(f"Accuracy: {accuracy:.1%}")   # Accuracy: 92.3%
 print(f"Accuracy: {accuracy:.2%}")   # Accuracy: 92.34%
 
-# Comma separator for large numbers
+# Comma separator for large numbers (the `:,` adds commas as thousands separators)
+# This is crucial for readability when printing parameter counts or dataset sizes!
 print(f"Parameters: {num_params:,}") # Parameters: 175,000,000,000
 
 # Padding and alignment (useful for formatted tables)
