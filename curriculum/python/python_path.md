@@ -9,7 +9,7 @@
 
 | # | Module | Status | Notes |
 |---|--------|--------|-------|
-| 1 | [Python Foundations](#module-1-python-foundations) | ⏳ Pending | - |
+| 1 | [Python Foundations](#module-1-python-foundations) | ✅ Done | [Notes](notes/01_python_foundations.md) |
 | 2 | [Data Structures Deep Dive](#module-2-data-structures-deep-dive) | ⏳ Pending | - |
 | 3 | [Functions & Functional Patterns](#module-3-functions--functional-patterns) | ⏳ Pending | - |
 | 4 | [OOP — The PyTorch Way](#module-4-oop--the-pytorch-way) | ⏳ Pending | - |
