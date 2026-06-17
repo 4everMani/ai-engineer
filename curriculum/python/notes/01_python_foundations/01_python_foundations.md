@@ -166,15 +166,36 @@ print(2 ^ 10)   # 8 (bitwise XOR, NOT 1024!)
 print(2 ** 10)  # 1024 (THIS is exponentiation)
 ```
 
-**🔥 AI Context:** Parameter counts like `175_000_000_000` (GPT-3) use underscores for readability. You'll see this in model cards and config files.
+```python
+import sys
+
+# In Python, ints are objects with arbitrary precision. They grow as needed!
+print(sys.getsizeof(0))             # 28 bytes (base object overhead)
+print(sys.getsizeof(1))             # 28 bytes
+print(sys.getsizeof(2**64))         # 36 bytes (grew larger to fit the number!)
+print(sys.getsizeof(2**1000))       # 160 bytes (a massive number, perfectly fine)
+```
+
+**🔥 AI Context:** In pure Python, ints have infinite size and never overflow. However, **PyTorch and NumPy use fixed-size C-style integers** under the hood for GPU efficiency. A PyTorch integer tensor defaults to 64-bit (`torch.int64`), but you'll often cast to `torch.int32` or `torch.int8` to save memory! Parameter counts like `175_000_000_000` (GPT-3) use underscores for readability in configs.
 
 #### `float` — 64-bit by Default
 
 ```python
-learning_rate = 3e-4         # Scientific notation: 0.0003
+# The 'e' stands for exponent (base 10). It is scientific notation:
+learning_rate = 3e-4         # 3 * 10^(-4) = 0.0003
+epsilon = 1e-8               # 1 * 10^(-8) = 0.00000001
 loss = 2.4567
-epsilon = 1e-8               # Numerical stability in Adam optimizer
 temperature = 0.7            # Softmax temperature for text generation
+
+# ⚠️ Notice how they print differently!
+print(f"LR: {learning_rate}")    # Output: LR: 0.0003
+print(f"Epsilon: {epsilon}")     # Output: Epsilon: 1e-08
+
+# Why? Python automatically formats numbers smaller than 0.0001
+# using scientific notation to prevent printing too many zeros.
+# You can force the format you want using f-string specifiers:
+print(f"LR forced: {learning_rate:.1e}")   # 3.0e-04
+print(f"Eps forced: {epsilon:.8f}")        # 0.00000001
 
 # Special float values
 import math
@@ -185,6 +206,9 @@ print(math.isinf(float('inf')))  # True
 # Initializing best loss tracking
 best_loss = float('inf')     # Any real loss will be smaller
 ```
+
+**Why do floats have precision issues?**
+This is a hardware reality (IEEE 754 standard), not a Python bug! In Base-10 (decimal), fractions like `1/3` repeat infinitely (`0.333...`). Computers use Base-2 (binary), where fractions like `1/10` (0.1) and `1/5` (0.2) repeat infinitely (`0.000110011...`). Because a 64-bit float has finite memory, the computer chops off the repeating sequence, losing a tiny bit of precision. When you add these rounded-off numbers together, the errors compound!
 
 ```python
 # ⚠️ GOTCHA: Float precision issues
@@ -202,6 +226,22 @@ print(math.isclose(0.1 + 0.2, 0.3))  # True
 
 #### `str` — Immutable Strings
 
+**Why are strings immutable?**
+1. **Dictionary Keys & Hashing:** Dictionaries map strings to numbers (e.g. `vocab = {"the": 0}`). This requires a stable "hash" value. If strings were mutable, their hash could change, breaking the dictionary.
+2. **Memory Efficiency (Interning):** Python can safely reuse the same string object for multiple variables (e.g., `a = "NLP"` and `b = "NLP"` point to the same memory), saving massive amounts of RAM.
+3. **Thread Safety:** Multiple threads can read the same string simultaneously without locking mechanisms.
+
+**The Impact: Concatenation in Loops**
+Because strings cannot be changed, operations like `+=` create a brand *new* string in memory.
+```python
+# ❌ BAD: This creates 10,000 new strings in memory, copying the old text every time.
+# result = ""
+# for word in words: result += word + " "
+
+# ✅ GOOD: Put pieces in a list, then join. Python calculates the needed memory exactly once.
+# result = " ".join(words)
+```
+
 ```python
 model_name = "bert-base-uncased"
 paper_title = 'Attention Is All You Need'
@@ -217,14 +257,29 @@ s = "hello"
 # s[0] = "H"  # TypeError: 'str' object does not support item assignment
 s = "H" + s[1:]  # Create a NEW string instead
 
-# Common string methods you'll use constantly
+# Common string methods you'll use constantly:
+
+# 1. .lower() / .upper() -> Changes case (useful for case-insensitive NLP)
 print("BERT".lower())                    # "bert"
 print("bert".upper())                    # "BERT"
-print("  bert  ".strip())               # "bert" (remove whitespace)
-print("a,b,c".split(","))               # ['a', 'b', 'c']
+
+# 2. .strip() -> Removes leading/trailing whitespace and newlines
+print("  bert  \n".strip())              # "bert"
+
+# 3. .split(delimiter) -> Splits a string into a list based on the delimiter
+print("a,b,c".split(","))                # ['a', 'b', 'c']
+print("the cat sat".split())             # ['the', 'cat', 'sat'] (default splits on spaces)
+
+# 4. "delimiter".join(list) -> The opposite of split. Joins a list into a single string
 print(" ".join(["attention", "is", "all"]))  # "attention is all"
-print("transformer" in "the transformer model")  # True (substring check)
+
+# 5. 'in' operator -> Checks if a substring exists within a string
+print("transformer" in "the transformer model")  # True
+
+# 6. .replace(old, new) -> Replaces all occurrences of 'old' with 'new'
 print("bert-base".replace("-", "_"))     # "bert_base"
+
+# 7. .startswith(prefix) / .endswith(suffix) -> Checks the beginning or end of a string
 print("hello world".startswith("hello")) # True
 print("model.pt".endswith(".pt"))        # True
 ```
@@ -478,6 +533,11 @@ print(f"Epoch [{epoch:3d}/{total_epochs}] | "
 ```
 
 ### 2.3 Alignment & Padding
+
+In f-strings, you can use alignment specifiers after the `:` to create perfectly lined-up columns without jagged text.
+- `>` Right-align (adds spaces to the left). e.g., `{str(val):>10}` means "pad with spaces on the left until it is exactly 10 characters wide".
+- `<` Left-align (adds spaces to the right).
+- `^` Center-align (adds spaces to both sides).
 
 ```python
 # Right-align with > (useful for formatted tables)
