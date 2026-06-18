@@ -429,8 +429,19 @@ WARMUP_STEPS = 1000
 ### ⚠️ Section 1 Pitfalls
 
 ```python
-# PITFALL 1: Mutable default arguments
-# ❌ NEVER use a mutable default — the list is SHARED across all calls!
+# PITFALL 1: Mutable default arguments (Lists, Dicts, Sets)
+# ❌ NEVER use a mutable object as a default parameter value!
+# This is because the default value is evaluated ONLY ONCE at function definition time,
+# NOT each time the function is called.
+#
+# Why it happens:
+# 1. At definition time: Python creates a single list object `[]` in memory and binds it to the parameter `layers`.
+# 2. Call 1: Since no argument is passed, Python uses that specific list object in memory. `append` mutates it in-place.
+# 3. Call 2: No argument is passed again, so Python re-uses the exact same list object, which now has data in it.
+#
+# Note: This pitfall only applies to MUTABLE objects (lists, dictionaries, sets, custom objects).
+# Immutable objects (ints, strings, tuples, None) are perfectly safe to use as defaults
+# because any operation on them creates a new object rather than modifying the existing one.
 def add_layer(layers=[]):
     layers.append("linear")
     return layers
